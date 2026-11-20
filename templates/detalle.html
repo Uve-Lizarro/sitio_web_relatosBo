@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle - {{ relato.titulo }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+        <a href="/" class="btn btn-secondary">&larr; Volver al listado</a>
+
+        <div class="d-flex gap-2">
+            <form action="/relato/{{ relato.id }}/reiniciar-analisis" method="POST" class="d-inline">
+                <button type="submit" class="btn btn-outline-warning text-dark">
+                    Reiniciar análisis
+                </button>
+            </form>
+            
+            <a href="/relato/{{ relato.id }}/editar" class="btn btn-primary">
+                Editar
+            </a>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10 mb-4">
+            <div class="card p-4 shadow-sm">
+                <h2>{{ relato.titulo }}</h2>
+                <p class="text-muted">
+                    <strong>Autor:</strong> {{ relato.autor }} |
+                    <strong>Departamento:</strong> {{ relato.departamento }}
+                </p>
+                <hr>
+                <h5>Texto del Relato:</h5>
+                <p style="white-space: pre-line;">{{ relato.texto }}</p>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-10 text-center">
+            <div class="card p-3 shadow-sm">
+                <h4>Gráfico de Análisis</h4>
+                <img src="{{ url_for('static', filename='images/' + imagen) }}?v={{ relato.id }}"
+                     alt="Gráfico para {{ relato.id }}"
+                     class="img-fluid rounded border my-2"
+                     onerror="this.onerror=null; this.src='https://via.placeholder.com/600x300?text=Imagen+No+Encontrada';">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
